@@ -1,7 +1,7 @@
 {
   "name": "backend-demo",
   "version": "1.0.0",
-  "main": "src/08/index.js",
+  "main": "src/08/index.ts",
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
