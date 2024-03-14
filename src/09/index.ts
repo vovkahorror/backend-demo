@@ -3,6 +3,9 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
+const jsonBodyMiddleware = express.json();
+app.use(jsonBodyMiddleware);
+
 const db = {
     courses: [
         {id: 1, title: 'front-end'},
@@ -35,6 +38,23 @@ app.get('/courses/:id', (req, res) => {
     }
 
     res.json(foundCourse);
+});
+
+app.post('/courses', (req, res) => {
+    if (!req.body.title || !req.body.title.trim()) {
+        res.sendStatus(400);
+        return;
+    }
+
+    const newCourse = {
+        id: +(new Date()),
+        title: req.body.title,
+    };
+    db.courses.push(newCourse);
+
+    res
+        .status(201)
+        .json(newCourse);
 });
 
 app.listen(port, () => {
