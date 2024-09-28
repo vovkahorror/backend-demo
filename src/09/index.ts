@@ -3,6 +3,7 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
+//create middleWare for parse json from body in post requests
 const jsonBodyMiddleware = express.json();
 app.use(jsonBodyMiddleware);
 

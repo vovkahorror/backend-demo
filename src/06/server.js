@@ -21,24 +21,21 @@ const server = http.createServer(async (req, res) => {
                 try {
                     const data = await readFile('./home.html');
                     res.write(data);
-                    res.end();
                 } catch (err) {
                     res.write('Some error, 500');
-                    res.end();
                 }
                 break;
             }
             case '/about': {
                 await delay(3000);
                 res.write('About');
-                res.end();
                 break;
             }
             default: {
                 res.write('404, page not found');
-                res.end();
             }
         }
+        res.end();
     }
 );
 
