@@ -57,6 +57,8 @@ app.post('/courses', (req, res) => {
     };
     db.courses.push(newCourse);
 
+    console.log(db.courses);
+
     res
         .status(201)
         .json(newCourse);
