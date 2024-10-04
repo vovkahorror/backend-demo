@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.send({message: 'Hello'});
 });
 
+app.get('/status', (req, res) => {
+    res.sendStatus(404);
+});
+
 app.get('/courses', (req, res) => {
     let foundCourses = db.courses;
 
