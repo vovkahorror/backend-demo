@@ -65,7 +65,14 @@ app.post('/courses', (req, res) => {
 });
 
 app.delete('/courses/:id', (req, res) => {
-    db.courses = db.courses.filter(course => course.id !== +req.params.id);
+    const filteredCourses = db.courses.filter(course => course.id !== +req.params.id);
+
+    if (filteredCourses.length === db.courses.length) {
+        res
+            .status(404)
+            .json('Not found requested id')
+        return
+    }
 
     res.sendStatus(204);
 });
