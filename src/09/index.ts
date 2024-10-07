@@ -77,6 +77,24 @@ app.delete('/courses/:id', (req, res) => {
     res.sendStatus(204);
 });
 
+app.put('/courses/:id', (req, res) => {
+    if (!req.body.title || !req.body.title.trim()) {
+        res.sendStatus(400);
+        return;
+    }
+
+    const foundCourse = db.courses.find(course => course.id === +req.params.id);
+
+    if (!foundCourse) {
+        res.sendStatus(404);
+        return;
+    }
+
+    foundCourse.title = req.body.title;
+
+    res.sendStatus(204);
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
