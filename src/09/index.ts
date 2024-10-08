@@ -74,6 +74,8 @@ app.delete('/courses/:id', (req, res) => {
         return
     }
 
+    console.log(db.courses);
+
     res.sendStatus(204);
 });
 
