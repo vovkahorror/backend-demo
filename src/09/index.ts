@@ -94,6 +94,8 @@ app.put('/courses/:id', (req, res) => {
 
     foundCourse.title = req.body.title;
 
+    console.log(db.courses);
+
     res.sendStatus(204);
 });
 
