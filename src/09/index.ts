@@ -3,6 +3,15 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
+const HTTP_STATUSES = {
+    OK_200: 200,
+    CREATED_201: 201,
+    NO_CONTENT_204: 204,
+
+    BAD_REQUEST_400: 400,
+    NOT_FOUND_404: 404,
+}
+
 //create middleWare for parse json from body in post requests
 const jsonBodyMiddleware = express.json();
 app.use(jsonBodyMiddleware);
