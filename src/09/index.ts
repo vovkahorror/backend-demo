@@ -3,13 +3,13 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
-const HTTP_STATUSES = {
-    OK_200: 200,
-    CREATED_201: 201,
-    NO_CONTENT_204: 204,
+enum HTTP_STATUSES {
+    OK_200 = 200,
+    CREATED_201 = 201,
+    NO_CONTENT_204 = 204,
 
-    BAD_REQUEST_400: 400,
-    NOT_FOUND_404: 404,
+    BAD_REQUEST_400 = 400,
+    NOT_FOUND_404 = 404,
 }
 
 //create middleWare for parse json from body in post requests
@@ -79,8 +79,8 @@ app.delete('/courses/:id', (req, res) => {
     if (filteredCourses.length === db.courses.length) {
         res
             .status(404)
-            .json('Not found requested id')
-        return
+            .json('Not found requested id');
+        return;
     }
 
     console.log(db.courses);
