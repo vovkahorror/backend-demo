@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/status', (req, res) => {
-    res.sendStatus(404);
+    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
 });
 
 app.get('/courses', (req, res) => {
@@ -47,7 +47,7 @@ app.get('/courses/:id', (req, res) => {
     const foundCourse = db.courses.find(course => course.id === +req.params.id);
 
     if (!foundCourse) {
-        res.sendStatus(404);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
 
@@ -56,7 +56,7 @@ app.get('/courses/:id', (req, res) => {
 
 app.post('/courses', (req, res) => {
     if (!req.body.title || !req.body.title.trim()) {
-        res.sendStatus(400);
+        res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
 
@@ -69,7 +69,7 @@ app.post('/courses', (req, res) => {
     console.log(db.courses);
 
     res
-        .status(201)
+        .status(HTTP_STATUSES.CREATED_201)
         .json(newCourse);
 });
 
@@ -78,26 +78,26 @@ app.delete('/courses/:id', (req, res) => {
 
     if (filteredCourses.length === db.courses.length) {
         res
-            .status(404)
+            .status(HTTP_STATUSES.NOT_FOUND_404)
             .json('Not found requested id');
         return;
     }
 
     console.log(db.courses);
 
-    res.sendStatus(204);
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 });
 
 app.put('/courses/:id', (req, res) => {
     if (!req.body.title || !req.body.title.trim()) {
-        res.sendStatus(400);
+        res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
 
     const foundCourse = db.courses.find(course => course.id === +req.params.id);
 
     if (!foundCourse) {
-        res.sendStatus(404);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
 
@@ -105,7 +105,7 @@ app.put('/courses/:id', (req, res) => {
 
     console.log(db.courses);
 
-    res.sendStatus(204);
+    res.sendStatus(HTTP_STATUSES.OK_200);
 });
 
 app.listen(port, () => {
