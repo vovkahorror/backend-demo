@@ -1,11 +1,11 @@
 {
   "name": "backend-demo",
   "version": "1.0.0",
-  "main": "src/10/index.ts",
+  "main": "src/12/index.ts",
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "nodemon --inspect dist/10/index.js"
+    "dev": "nodemon --inspect dist/12/index.js"
   },
   "dependencies": {
     "express": "^4.21.2"
