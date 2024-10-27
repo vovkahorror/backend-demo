@@ -11,6 +11,12 @@ app.get('/products', (req, res) => {
     res.send(products)
 })
 
+app.get('/products/apple', (req, res) => {
+    const apple = products.find(p => p.title === 'apple')
+
+    res.send(apple)
+})
+
 app.get('/addresses', (req, res) => {
     res.send(addresses)
 })
