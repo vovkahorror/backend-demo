@@ -5,7 +5,7 @@ const app = express()
 const port = process.env.PORT || 5000
 
 const products = [{title: 'apple'}, {title: 'potato'}]
-const addresses = [{value: 'Kherson'}, {title: 'Kyiv'}, {title: 'Ivano-Frankivsk'}]
+const addresses = [{id: 1, value: 'Kherson'}, {id: 2, title: 'Kyiv'}, {id: 3, title: 'Ivano-Frankivsk'}]
 
 app.get('/products', (req, res) => {
     res.send(products)
@@ -22,6 +22,10 @@ app.get('/products/:productTitle', (req, res) => {
 })
 
 app.get('/addresses', (req, res) => {
+    res.send(addresses)
+})
+
+app.get('/addresses/:id', (req, res) => {
     res.send(addresses)
 })
 
