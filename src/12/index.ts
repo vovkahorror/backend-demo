@@ -26,7 +26,13 @@ app.get('/addresses', (req, res) => {
 })
 
 app.get('/addresses/:id', (req, res) => {
-    res.send(addresses)
+    const address = addresses.find(a => a.id === +req.params.id)
+
+    if (address) {
+        res.send(address)
+    } else {
+        res.send(404)
+    }
 })
 
 app.listen(port, () => {
