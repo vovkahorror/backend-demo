@@ -8,7 +8,13 @@ const products = [{title: 'apple'}, {title: 'potato'}]
 const addresses = [{id: 1, value: 'Kherson'}, {id: 2, title: 'Kyiv'}, {id: 3, title: 'Ivano-Frankivsk'}]
 
 app.get('/products', (req, res) => {
-    res.send(products)
+    if (req.query.title) {
+        const searchString = req.query.title.toString()
+        const filteredProducts = products.filter(p => p.title.includes(searchString))
+        res.send(filteredProducts)
+    } else {
+        res.send(products)
+    }
 })
 
 app.get('/products/:productTitle', (req, res) => {
