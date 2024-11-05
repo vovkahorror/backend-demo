@@ -4,6 +4,9 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
+const jsonBodyMiddleware = express.json();
+app.use(jsonBodyMiddleware);
+
 const products = [{id: 1, title: 'apple'}, {id: 2, title: 'potato'}];
 const addresses = [{id: 1, value: 'Kherson'}, {id: 2, title: 'Kyiv'}, {id: 3, title: 'Ivano-Frankivsk'}];
 
@@ -15,6 +18,16 @@ app.get('/products', (req, res) => {
     } else {
         res.send(products);
     }
+});
+
+app.post('/products', (req, res) => {
+    const newProduct = {
+        id: +(new Date()),
+        title: req.body.title,
+    };
+
+    products.push(newProduct);
+    res.status(201).send(newProduct);
 });
 
 app.get('/products/:productTitle', (req, res) => {
