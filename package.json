@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "nodemon --inspect dist/12/index.js"
+    "dev": "nodemon --inspect dist/12/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.21.2"
