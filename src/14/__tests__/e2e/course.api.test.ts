@@ -9,7 +9,7 @@ describe('/course', () => {
     it('should return 200 and empty array',  async() => {
         await request(app).
             get('/courses').
-            expect(HTTP_STATUSES.OK_200);
+            expect(HTTP_STATUSES.OK_200, []);
     })
 
     it('should return 404 for not existing course', async () => {
@@ -23,5 +23,9 @@ describe('/course', () => {
             post('/courses').
             send({title: ''}).
             expect(HTTP_STATUSES.BAD_REQUEST_400);
+
+        await request(app).
+        get('/courses').
+        expect(HTTP_STATUSES.OK_200, []);
     })
 })
