@@ -25,7 +25,19 @@ describe('/course', () => {
             expect(HTTP_STATUSES.BAD_REQUEST_400);
 
         await request(app).
-        get('/courses').
-        expect(HTTP_STATUSES.OK_200, []);
+            get('/courses').
+            expect(HTTP_STATUSES.OK_200, []);
+    })
+
+    it('should create course with correct input data', async () => {
+        const createdResponse = await request(app).
+            post('/courses').
+            send({title: 'turbo pascal'}).
+            expect(HTTP_STATUSES.CREATED_201);
+
+        expect(createdResponse.body).toEqual({
+            id: expect.any(Number),
+            title: 'turbo pascal'
+        })
     })
 })
