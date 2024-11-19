@@ -62,8 +62,22 @@ describe('/course', () => {
 
     it('should\'nt update not existing course', async () => {
         await request(app).
-            put('/courses/2').
+            put('/courses/-100').
             send({title: 'updated course'}).
             expect(HTTP_STATUSES.NOT_FOUND_404);
+    })
+
+    it('should update course with correct input data', async () => {
+        await request(app).
+            put(`/courses/${createdCourse.id}`).
+            send({title: 'updated course'}).
+            expect(HTTP_STATUSES.OK_200);
+
+        await request(app).
+            get('/courses').
+            expect(HTTP_STATUSES.OK_200, [{
+                ...createdCourse,
+                title: 'updated course'
+            }]);
     })
 })
