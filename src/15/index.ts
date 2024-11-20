@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 
 export const app = express();
 const port = 3000;
@@ -16,7 +16,12 @@ export enum HTTP_STATUSES {
 const jsonBodyMiddleware = express.json();
 app.use(jsonBodyMiddleware);
 
-const db = {
+type CourseType = {
+    id: number,
+    title: string,
+};
+
+const db: {courses: CourseType[]} = {
     courses: [
         {id: 1, title: 'front-end'},
         {id: 2, title: 'back-end'},
@@ -33,11 +38,11 @@ app.get('/status', (req, res) => {
     res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
 });
 
-app.get('/courses', (req, res) => {
+app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<CourseType[]>) => {
     let foundCourses = db.courses;
 
     if (req.query.title) {
-        foundCourses = foundCourses.filter(course => course.title.indexOf(req.query.title as string) > -1);
+        foundCourses = foundCourses.filter(course => course.title.indexOf(req.query.title) > -1);
     }
 
     res.json(foundCourses);
