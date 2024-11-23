@@ -78,7 +78,7 @@ app.post('/courses', (req: Request<{}, {}, {title: string}>, res: Response<Cours
         .json(newCourse);
 });
 
-app.delete('/courses/:id', (req, res) => {
+app.delete('/courses/:id', (req: Request<{id: string}>, res) => {
     const filteredCourses = db.courses.filter(course => course.id !== +req.params.id);
 
     if (filteredCourses.length === db.courses.length) {
