@@ -93,7 +93,7 @@ app.delete('/courses/:id', (req: Request<{id: string}>, res) => {
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 });
 
-app.put('/courses/:id', (req, res) => {
+app.put('/courses/:id', (req: Request<{id: string}, {}, {title: string}>, res) => {
     if (!req.body.title || !req.body.title.trim()) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
