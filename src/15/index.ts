@@ -1,4 +1,5 @@
-import express, {Request, Response} from 'express';
+import express, {Response} from 'express';
+import {RequestWithBody, RequestWithParams, RequestWithParamsAndBody, RequestWithQuery} from './types';
 
 export const app = express();
 const port = 3000;
@@ -38,7 +39,7 @@ app.get('/status', (req, res) => {
     res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
 });
 
-app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<CourseType[]>) => {
+app.get('/courses', (req: RequestWithQuery<{title: string}>, res: Response<CourseType[]>) => {
     let foundCourses = db.courses;
 
     if (req.query.title) {
@@ -48,7 +49,7 @@ app.get('/courses', (req: Request<{}, {}, {}, {title: string}>, res: Response<Co
     res.json(foundCourses);
 });
 
-app.get('/courses/:id', (req: Request<{id: string}>, res: Response<CourseType>) => {
+app.get('/courses/:id', (req: RequestWithParams<{id: string}>, res: Response<CourseType>) => {
     const foundCourse = db.courses.find(course => course.id === +req.params.id);
 
     if (!foundCourse) {
@@ -59,7 +60,7 @@ app.get('/courses/:id', (req: Request<{id: string}>, res: Response<CourseType>) 
     res.json(foundCourse);
 });
 
-app.post('/courses', (req: Request<{}, {}, {title: string}>, res: Response<CourseType>) => {
+app.post('/courses', (req: RequestWithBody<{title: string}>, res: Response<CourseType>) => {
     if (!req.body.title || !req.body.title.trim()) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
@@ -78,7 +79,7 @@ app.post('/courses', (req: Request<{}, {}, {title: string}>, res: Response<Cours
         .json(newCourse);
 });
 
-app.delete('/courses/:id', (req: Request<{id: string}>, res) => {
+app.delete('/courses/:id', (req: RequestWithParams<{id: string}>, res) => {
     const filteredCourses = db.courses.filter(course => course.id !== +req.params.id);
 
     if (filteredCourses.length === db.courses.length) {
@@ -93,7 +94,7 @@ app.delete('/courses/:id', (req: Request<{id: string}>, res) => {
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 });
 
-app.put('/courses/:id', (req: Request<{id: string}, {}, {title: string}>, res) => {
+app.put('/courses/:id', (req: RequestWithParamsAndBody<{id: string}, {title: string}>, res) => {
     if (!req.body.title || !req.body.title.trim()) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
