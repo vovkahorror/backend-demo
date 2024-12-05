@@ -4,6 +4,7 @@ import {CreateCourseModel} from './models/CreateCourseModel';
 import {UpdateCourseModel} from './models/UpdateCourseModel';
 import {QueryCoursesModel} from './models/QueryCoursesModel';
 import {CourseViewModel} from './models/CourseViewModel';
+import {URIParamsCourseIdModel} from './models/URIParamsCourseIdModel';
 
 export const app = express();
 const port = 3000;
@@ -57,7 +58,7 @@ app.get('/courses', (req: RequestWithQuery<QueryCoursesModel>, res: Response<Cou
     })));
 });
 
-app.get('/courses/:id', (req: RequestWithParams<{id: string}>, res: Response<CourseViewModel>) => {
+app.get('/courses/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res: Response<CourseViewModel>) => {
     const foundCourse = db.courses.find(course => course.id === +req.params.id);
 
     if (!foundCourse) {
@@ -91,7 +92,7 @@ app.post('/courses', (req: RequestWithBody<CreateCourseModel>, res: Response<Cou
         .json(newCourse);
 });
 
-app.delete('/courses/:id', (req: RequestWithParams<{id: string}>, res) => {
+app.delete('/courses/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res) => {
     const filteredCourses = db.courses.filter(course => course.id !== +req.params.id);
 
     if (filteredCourses.length === db.courses.length) {
@@ -106,7 +107,7 @@ app.delete('/courses/:id', (req: RequestWithParams<{id: string}>, res) => {
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 });
 
-app.put('/courses/:id', (req: RequestWithParamsAndBody<{id: string}, UpdateCourseModel>, res) => {
+app.put('/courses/:id', (req: RequestWithParamsAndBody<URIParamsCourseIdModel, UpdateCourseModel>, res) => {
     if (!req.body.title || !req.body.title.trim()) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
