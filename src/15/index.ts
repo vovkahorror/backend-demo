@@ -7,7 +7,7 @@ import {CourseViewModel} from './models/CourseViewModel';
 import {URIParamsCourseIdModel} from './models/URIParamsCourseIdModel';
 
 export const app = express();
-const port = 3000;
+const port = 3001;
 
 export enum HTTP_STATUSES {
     OK_200 = 200,
@@ -89,7 +89,10 @@ app.post('/courses', (req: RequestWithBody<CreateCourseModel>, res: Response<Cou
 
     res
         .status(HTTP_STATUSES.CREATED_201)
-        .json(newCourse);
+        .json({
+            id: newCourse.id,
+            title: newCourse.title
+        });
 });
 
 app.delete('/courses/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res) => {
