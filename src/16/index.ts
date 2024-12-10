@@ -7,7 +7,7 @@ import {CourseViewModel} from './models/CourseViewModel';
 import {URIParamsCourseIdModel} from './models/URIParamsCourseIdModel';
 
 export const app = express();
-const port = 3001;
+
 
 export enum HTTP_STATUSES {
     OK_200 = 200,
@@ -130,6 +130,8 @@ app.delete('/__test__/data', (req, res) => {
     db.courses = [];
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 });
+
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
