@@ -1,5 +1,6 @@
 import express from 'express';
-import {addCoursesRoutes, db, HTTP_STATUSES} from './routes/courses';
+import {addCoursesRoutes, HTTP_STATUSES} from './routes/courses';
+import {db} from './db/db';
 
 export const app = express();
 

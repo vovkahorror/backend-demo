@@ -5,6 +5,7 @@ import {CourseViewModel} from '../models/CourseViewModel';
 import {URIParamsCourseIdModel} from '../models/URIParamsCourseIdModel';
 import {CreateCourseModel} from '../models/CreateCourseModel';
 import {UpdateCourseModel} from '../models/UpdateCourseModel';
+import {CourseType, db} from '../db/db';
 
 export enum HTTP_STATUSES {
     OK_200 = 200,
@@ -14,21 +15,6 @@ export enum HTTP_STATUSES {
     BAD_REQUEST_400 = 400,
     NOT_FOUND_404 = 404,
 }
-
-export type CourseType = {
-    id: number,
-    title: string,
-    studentsCount: number
-};
-
-export const db: { courses: CourseType[] } = {
-    courses: [
-        {id: 1, title: 'front-end', studentsCount: 8},
-        {id: 2, title: 'back-end', studentsCount: 12},
-        {id: 3, title: 'full-stack', studentsCount: 6},
-        {id: 4, title: 'mobile', studentsCount: 10},
-    ],
-};
 
 export const getCourseViewModel = (dbCourse: CourseType): CourseViewModel => ({
     id: dbCourse.id,
