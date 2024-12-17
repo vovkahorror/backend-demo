@@ -1,6 +1,7 @@
 import express from 'express';
-import {addCoursesRoutes, HTTP_STATUSES} from './routes/courses';
+import {addCoursesRoutes} from './routes/courses';
 import {db} from './db/db';
+import {addTestsRoutes} from './routes/tests';
 
 export const app = express();
 
@@ -10,8 +11,4 @@ export const jsonBodyMiddleware = express.json();
 app.use(jsonBodyMiddleware);
 
 addCoursesRoutes(app);
-
-app.delete('/__test__/data', (req, res) => {
-    db.courses = [];
-    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
-});
+addTestsRoutes(app, db);

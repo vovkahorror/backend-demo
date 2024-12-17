@@ -4,7 +4,9 @@ export type CourseType = {
     studentsCount: number
 };
 
-export const db: { courses: CourseType[] } = {
+export type DBType = { courses: CourseType[] }
+
+export const db: DBType = {
     courses: [
         {id: 1, title: 'front-end', studentsCount: 8},
         {id: 2, title: 'back-end', studentsCount: 12},
