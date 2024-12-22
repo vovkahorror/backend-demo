@@ -10,5 +10,5 @@ export const jsonBodyMiddleware = express.json();
 
 app.use(jsonBodyMiddleware);
 
-addCoursesRoutes(app);
+addCoursesRoutes(app, db);
 addTestsRoutes(app, db);

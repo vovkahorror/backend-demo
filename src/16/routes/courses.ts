@@ -5,7 +5,7 @@ import {CourseViewModel} from '../models/CourseViewModel';
 import {URIParamsCourseIdModel} from '../models/URIParamsCourseIdModel';
 import {CreateCourseModel} from '../models/CreateCourseModel';
 import {UpdateCourseModel} from '../models/UpdateCourseModel';
-import {CourseType, db} from '../db/db';
+import {CourseType, DBType} from '../db/db';
 
 export enum HTTP_STATUSES {
     OK_200 = 200,
@@ -21,7 +21,7 @@ export const getCourseViewModel = (dbCourse: CourseType): CourseViewModel => ({
     title: dbCourse.title,
 });
 
-export const addCoursesRoutes = (app: Express)=> {
+export const addCoursesRoutes = (app: Express, db: DBType)=> {
     app.get('/', (req, res) => {
         res.send({message: 'Hello'});
     });
