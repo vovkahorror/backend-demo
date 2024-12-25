@@ -6,15 +6,7 @@ import {URIParamsCourseIdModel} from '../models/URIParamsCourseIdModel';
 import {CreateCourseModel} from '../models/CreateCourseModel';
 import {UpdateCourseModel} from '../models/UpdateCourseModel';
 import {CourseType, DBType} from '../db/db';
-
-export enum HTTP_STATUSES {
-    OK_200 = 200,
-    CREATED_201 = 201,
-    NO_CONTENT_204 = 204,
-
-    BAD_REQUEST_400 = 400,
-    NOT_FOUND_404 = 404,
-}
+import {HTTP_STATUSES} from '../common/enums/http-statuses';
 
 export const getCourseViewModel = (dbCourse: CourseType): CourseViewModel => ({
     id: dbCourse.id,
@@ -23,14 +15,6 @@ export const getCourseViewModel = (dbCourse: CourseType): CourseViewModel => ({
 
 export const getCoursesRoutes = (db: DBType) => {
     const coursesRouter = express.Router();
-
-    // coursesRouter.get('/', (req, res) => {
-    //     res.send({message: 'Hello'});
-    // });
-    //
-    // coursesRouter.get('/status', (req, res) => {
-    //     res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
-    // });
 
     coursesRouter.get('/', (req: RequestWithQuery<QueryCoursesModel>, res: Response<CourseViewModel[]>) => {
         let foundCourses = db.courses;

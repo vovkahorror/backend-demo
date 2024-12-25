@@ -1,6 +1,7 @@
 import {Express} from 'express';
 import {DBType} from '../db/db';
-import {HTTP_STATUSES} from './courses';
+
+import {HTTP_STATUSES} from '../common/enums/http-statuses';
 
 export const addTestsRoutes = (app: Express, db: DBType)=> {
     app.delete('/__test__/data', (req, res) => {
