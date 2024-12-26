@@ -13,7 +13,7 @@ export const getCourseViewModel = (dbCourse: CourseType): CourseViewModel => ({
     title: dbCourse.title,
 });
 
-export const getCoursesRoutes = (db: DBType) => {
+export const getCoursesRouter = (db: DBType) => {
     const coursesRouter = express.Router();
 
     coursesRouter.get('/', (req: RequestWithQuery<QueryCoursesModel>, res: Response<CourseViewModel[]>) => {

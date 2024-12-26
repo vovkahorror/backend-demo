@@ -1,7 +1,7 @@
 import express from 'express';
 import {HTTP_STATUSES} from '../common/enums/http-statuses';
 
-export const getMainRoutes = () => {
+export const getMainRouter = () => {
     const coursesRouter = express.Router();
 
     coursesRouter.get('/', (req, res) => {
