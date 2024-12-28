@@ -1,11 +1,15 @@
-import {Express} from 'express';
+import express from 'express';
 import {DBType} from '../db/db';
 
 import {HTTP_STATUSES} from '../common/enums/http-statuses';
 
-export const addTestsRoutes = (app: Express, db: DBType)=> {
-    app.delete('/__test__/data', (req, res) => {
+export const getTestsRouter = (db: DBType)=> {
+    const coursesRouter = express.Router();
+
+    coursesRouter.delete('/data', (req, res) => {
         db.courses = [];
         res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     });
+
+    return coursesRouter
 }
