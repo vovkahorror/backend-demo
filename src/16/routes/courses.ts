@@ -14,9 +14,9 @@ export const getCourseViewModel = (dbCourse: CourseType): CourseViewModel => ({
 });
 
 export const getCoursesRouter = (db: DBType) => {
-    const coursesRouter = express.Router();
+    const router = express.Router();
 
-    coursesRouter.get('/', (req: RequestWithQuery<QueryCoursesModel>, res: Response<CourseViewModel[]>) => {
+    router.get('/', (req: RequestWithQuery<QueryCoursesModel>, res: Response<CourseViewModel[]>) => {
         let foundCourses = db.courses;
 
         if (req.query.title) {
@@ -26,7 +26,7 @@ export const getCoursesRouter = (db: DBType) => {
         res.json(foundCourses.map(getCourseViewModel));
     });
 
-    coursesRouter.get('/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res: Response<CourseViewModel>) => {
+    router.get('/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res: Response<CourseViewModel>) => {
         const foundCourse = db.courses.find(course => course.id === +req.params.id);
 
         if (!foundCourse) {
@@ -37,7 +37,7 @@ export const getCoursesRouter = (db: DBType) => {
         res.json(getCourseViewModel(foundCourse));
     });
 
-    coursesRouter.post('/', (req: RequestWithBody<CreateCourseModel>, res: Response<CourseViewModel>) => {
+    router.post('/', (req: RequestWithBody<CreateCourseModel>, res: Response<CourseViewModel>) => {
         if (!req.body.title || !req.body.title.trim()) {
             res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
             return;
@@ -57,7 +57,7 @@ export const getCoursesRouter = (db: DBType) => {
             .json(getCourseViewModel(newCourse));
     });
 
-    coursesRouter.delete('/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res) => {
+    router.delete('/:id', (req: RequestWithParams<URIParamsCourseIdModel>, res) => {
         const filteredCourses = db.courses.filter(course => course.id !== +req.params.id);
 
         if (filteredCourses.length === db.courses.length) {
@@ -72,7 +72,7 @@ export const getCoursesRouter = (db: DBType) => {
         res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     });
 
-    coursesRouter.put('/:id', (req: RequestWithParamsAndBody<URIParamsCourseIdModel, UpdateCourseModel>, res) => {
+    router.put('/:id', (req: RequestWithParamsAndBody<URIParamsCourseIdModel, UpdateCourseModel>, res) => {
         if (!req.body.title || !req.body.title.trim()) {
             res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
             return;
@@ -92,5 +92,5 @@ export const getCoursesRouter = (db: DBType) => {
         res.sendStatus(HTTP_STATUSES.OK_200);
     });
 
-    return coursesRouter;
+    return router;
 };
