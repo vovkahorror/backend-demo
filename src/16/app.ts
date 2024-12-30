@@ -11,10 +11,6 @@ export const jsonBodyMiddleware = express.json();
 
 app.use(jsonBodyMiddleware);
 
-const mainRoutes = getMainRouter();
-const coursesRouter = getCoursesRouter(db);
-const testsRouter = getTestsRouter(db);
-
-app.use('/', mainRoutes);
-app.use('/courses', coursesRouter);
-app.use('/__test__', testsRouter);
+app.use('/', getMainRouter());
+app.use('/courses', getCoursesRouter(db));
+app.use('/__test__', getTestsRouter(db));
