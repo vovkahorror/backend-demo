@@ -2,7 +2,7 @@ import {Router} from 'express';
 
 const products = [{id: 1, title: 'apple'}, {id: 2, title: 'potato'}];
 
-const productsRouter = Router({})
+export const productsRouter = Router({})
 
 productsRouter.get('/', (req, res) => {
     if (req.query.title) {
