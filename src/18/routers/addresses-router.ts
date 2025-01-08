@@ -1,15 +1,15 @@
 import {Router} from 'express';
+import {addressesRepository} from '../repositories/addresses-repository';
 
-const addresses = [{id: 1, value: 'Kherson'}, {id: 2, title: 'Kyiv'}, {id: 3, title: 'Ivano-Frankivsk'}];
-
-export const addressesRouter = Router({})
+export const addressesRouter = Router({});
 
 addressesRouter.get('/', (req, res) => {
-    res.send(addresses);
+    const foundProducts = addressesRepository.findAddresses(req.query.title?.toString());
+    res.send(foundProducts);
 });
 
 addressesRouter.get('/:id', (req, res) => {
-    const address = addresses.find(a => a.id === +req.params.id);
+    const address = addressesRepository.findAddressById(+req.params.id);
 
     if (address) {
         res.send(address);
