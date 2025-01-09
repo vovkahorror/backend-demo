@@ -1,11 +1,11 @@
 {
   "name": "backend-demo",
   "version": "1.0.0",
-  "main": "src/18/index.ts",
+  "main": "src/19/index.ts",
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "nodemon --inspect dist/18/index.js",
+    "dev": "nodemon --inspect dist/19/index.js",
     "test": "jest --detectOpenHandles --no-cache"
   },
   "dependencies": {
