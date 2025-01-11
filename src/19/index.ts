@@ -1,14 +1,16 @@
-import express, {NextFunction} from 'express';
+import express, {NextFunction, Request, Response} from 'express';
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.get('/products', (req, res, next: NextFunction) => {
+const blablaMiddleware = (req: Request, res: Response, next: NextFunction) => {
     // @ts-ignore
     req.blalbla = 'hello';
     next();
-}, (req, res) => {
+}
+
+app.get('/products', blablaMiddleware, (req, res) => {
     // @ts-ignore
     const blalbla = req.blalbla;
     res.send({value: blalbla + ' world!'});
