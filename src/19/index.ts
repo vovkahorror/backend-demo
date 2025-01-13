@@ -10,7 +10,9 @@ const blablaMiddleware = (req: Request, res: Response, next: NextFunction) => {
     next();
 }
 
-app.get('/products', blablaMiddleware, (req, res) => {
+app.use(blablaMiddleware)
+
+app.get('/products', (req, res) => {
     // @ts-ignore
     const blalbla = req.blalbla;
     res.send({value: blalbla + ' world!'});
