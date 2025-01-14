@@ -10,7 +10,15 @@ const blablaMiddleware = (req: Request, res: Response, next: NextFunction) => {
     next();
 }
 
-app.use(blablaMiddleware)
+const authGuardMiddleware = (req: Request, res: Response, next: NextFunction) => {
+    if (req.query.token === '123') {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
+
+app.use(blablaMiddleware, authGuardMiddleware)
 
 app.get('/products', (req, res) => {
     // @ts-ignore
