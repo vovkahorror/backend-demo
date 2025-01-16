@@ -30,7 +30,7 @@ app.use(requestCounterMiddleware, blablaMiddleware, authGuardMiddleware);
 app.get('/products', (req, res) => {
     // @ts-ignore
     const blalbla = req.blalbla;
-    res.send({value: blalbla + ' world!' + requestCounter});
+    res.send({value: blalbla + ' world! ' + requestCounter});
 });
 
 app.listen(port, () => {
