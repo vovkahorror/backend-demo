@@ -1,10 +1,9 @@
-import express from "express";
-import bodyParser from 'body-parser';
+import express from 'express';
 import {productsRouter} from './routers/products-router';
 
 const app = express()
 
-app.use(bodyParser())
+app.use(express.json())
 
 const port = process.env.PORT || 5000
 
