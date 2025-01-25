@@ -4,6 +4,11 @@ import {productsRepository} from '../repositories/products-repository';
 export const productsRouter = Router({});
 
 productsRouter.post('/', (req, res) => {
+    if (!req.body.title.trim()) {
+        res.status(400).send({message: 'title is required'});
+        return;
+    }
+
     const newProduct = productsRepository.createProduct(req.body.title);
     res.status(201).send(newProduct);
 });
@@ -24,8 +29,8 @@ productsRouter.get('/', (req, res) => {
     res.send(foundProducts);
 });
 
-productsRouter.get('/:productTitle', (req, res) => {
-    const product = productsRepository.findProductByTitle(req.params.productTitle);
+productsRouter.get('/:id', (req, res) => {
+    const product = productsRepository.findProductById(+req.params.id);
 
     if (product) {
         res.send(product);
@@ -34,8 +39,8 @@ productsRouter.get('/:productTitle', (req, res) => {
     }
 });
 
-productsRouter.get('/:id', (req, res) => {
-    const product = productsRepository.findProductById(+req.params.id);
+productsRouter.get('/:productTitle', (req, res) => {
+    const product = productsRepository.findProductByTitle(req.params.productTitle);
 
     if (product) {
         res.send(product);
